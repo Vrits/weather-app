@@ -1,23 +1,13 @@
-import SearchBar from "./components/SearchBar";
-import { useWeather } from "./context/useWeather";
+import SearchBar from "./components/search/SearchBar";
+import CurrentWeather from "./components/weather/CurrentWeather";
 
 function App() {
-  const { location } = useWeather();
-
   return (
-    <>
-      <SearchBar />
+  <section className="container mx-auto py-4 px-4">
 
-      <button
-        onClick={() => {
-          if (!location.value.latitude) return;
-          console.log(location);
-        }}
-        style={{ fontSize: "2rem" }}
-      >
-        Test
-      </button>
-    </>
+      <SearchBar />
+      <CurrentWeather />
+  </section>
   );
 }
 

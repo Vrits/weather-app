@@ -1,7 +1,7 @@
 import { AsyncPaginate } from "react-select-async-paginate";
-import { geoApiOptions, geoApiUrl } from "../api/api";
-import { useWeather } from "../context/useWeather";
-import { CoordinateInfo } from "../context/WeatherContext";
+import { geoApiOptions, geoApiUrl } from "../../api/api";
+import { useWeather } from "../../context/useWeather";
+import { CoordinateInfo } from "../../context/WeatherContext";
 // import { useState } from "react";
 
 const SearchBar = () => {
