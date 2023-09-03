@@ -1,18 +1,27 @@
-import cloudy from '/public/Images/cloudy.jpg'
+
+import WeatherDetail from "./WeatherDetail";
+import cloudy from "/public/Images/cloudy.jpg";
 const CurrentWeather = () => {
+
+
+
   return (
-    <div className="max-w-xl flex flex-col rounded-lg mt-2 overflow-hidden text-white" style={{backgroundImage: `url(${cloudy})`}}>
-      <div className='bg-black/50 p-3' >
-        <p className='font-bold text-xl'>
+    <>
+    <div
+      className="max-w-xl w-full flex flex-col rounded-lg mt-2 overflow-hidden text-white"
+      style={{ backgroundImage: `url(${cloudy})` }}
+    >
+      <div className="bg-black/50 backdrop-blur-md p-3">
+        <p className="font-bold text-xl">
           Banjarmasin, South Kalimantan, Indonesia{" "}
-          <span className='font-normal text-base'>As of 7:17 am WITA</span>
+          {/* <span className="font-normal text-base">As of 7:17 am WITA</span> */}
         </p>
       </div>
-      <div className='p-4 flex justify-between items-center'>
+      <div className="p-4 flex justify-between items-center">
         <div>
-          <p className='text-7xl font-bold'>24°</p>
-          <p className='font-bold text-lg'>Smoke</p>
-          <p className='font-bold text-lg'>Day 36° • Night 22°</p>
+          <p className="text-7xl font-bold">24°</p>
+          <p className="font-bold text-lg">Smoke</p>
+          <p className="font-bold text-lg">Day 36° • Night 22°</p>
         </div>
         <div>
           <svg
@@ -32,6 +41,9 @@ const CurrentWeather = () => {
         </div>
       </div>
     </div>
+    <WeatherDetail />
+    </>
+
   );
 };
 

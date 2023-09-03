@@ -1,4 +1,5 @@
 import { PropsWithChildren, createContext, useState } from "react";
+import { WEATHER_API_KEY, weatherApiUrl } from "../api/api";
 
 // type LocationType = {
 //   latitude: number | undefined;
@@ -24,22 +25,60 @@ export const WeatherContext = createContext<WeatherContextType | undefined>(
 
 const WeatherProvider = ({ children }: PropsWithChildren) => {
   const [location, setLocation] = useState<CoordinateInfo>({
-    label: "",
+    label: "Banjarmasin City, ID",
     value: {
-      latitude: undefined,
-      longitude: undefined,
+      latitude: -3.314429472,
+      longitude: 114.592253736,
     },
   });
 
+  const fetchWeather = async (locationInput: CoordinateInfo) => {
+    // try {
+    //   const response = await fetch(
+    //     `${weatherApiUrl}/weather?lat=${locationInput.value.latitude}&lon=${locationInput.value.longitude}&appid=${WEATHER_API_KEY}`
+    //   );
+    //   const result = await response.text();
+
+    //   console.log(result);
+    // } catch (error) {
+    //   console.error(error);
+    // }
+
+    const { latitude, longitude } = locationInput.value;
+
+    const currentWeatherFetch = fetch(
+      `${weatherApiUrl}/weather?lat=${latitude}&lon=${longitude}&appid=${WEATHER_API_KEY}`
+    );
+    const forecastFetch = fetch(
+      `${weatherApiUrl}/forecast?lat=${latitude}&lon=${longitude}&appid=${WEATHER_API_KEY}`
+    );
+
+    Promise.all([currentWeatherFetch, forecastFetch])
+      .then(async (res) => {
+        const weatherResponse = await res[0].json();
+        const forecastResponse = await res[1].json();
+
+        console.log(locationInput.label)
+        console.log(weatherResponse);
+        console.log(forecastResponse);
+      })
+      .catch((err) => console.log(err));
+  };
+
   const changeLocation = (locationInput: CoordinateInfo) => {
     setLocation(locationInput);
-    console.log(locationInput)
+    fetchWeather(locationInput);
+    // console.log(locationInput)
   };
 
   const contextValue: WeatherContextType = {
     location,
     changeLocation,
   };
+
+  // useEffect(() => {
+  //   fetchWeather();
+  // }, [location]);
 
   return (
     <WeatherContext.Provider value={contextValue}>

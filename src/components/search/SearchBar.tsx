@@ -34,7 +34,7 @@ const SearchBar = () => {
         },
       }));
 
-      console.log(data);
+      // console.log(data);
 
       return {
         options: data,
@@ -57,7 +57,7 @@ const SearchBar = () => {
 
   return (
     <>
-      <AsyncPaginate
+      <AsyncPaginate className="w-80 max-w-full"
         debounceTimeout={600}
         placeholder="Search for a city"
         loadOptions={loadOptions}
