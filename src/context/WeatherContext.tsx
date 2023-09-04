@@ -1,10 +1,5 @@
-import { PropsWithChildren, createContext, useState } from "react";
+import { PropsWithChildren, createContext, useState, useEffect } from "react";
 import { WEATHER_API_KEY, weatherApiUrl } from "../api/api";
-
-// type LocationType = {
-//   latitude: number | undefined;
-//   longitude: number | undefined;
-// };
 
 export type CoordinateInfo = {
   label: string;
@@ -14,8 +9,16 @@ export type CoordinateInfo = {
   };
 };
 
+export type WeatherTodayType = {
+  feels_like: number | undefined;
+  weather: string | undefined;
+  temp_max: number | undefined;
+  temp_min: number | undefined;
+};
+
 export type WeatherContextType = {
   location: CoordinateInfo;
+  weatherToday: WeatherTodayType;
   changeLocation: (locationInput: CoordinateInfo) => void;
 };
 
@@ -25,25 +28,21 @@ export const WeatherContext = createContext<WeatherContextType | undefined>(
 
 const WeatherProvider = ({ children }: PropsWithChildren) => {
   const [location, setLocation] = useState<CoordinateInfo>({
-    label: "Banjarmasin City, ID",
+    label: "Banjarmasin City, South Kalimantan, Indonesia",
     value: {
       latitude: -3.314429472,
       longitude: 114.592253736,
     },
   });
 
+  const [weatherToday, setWeatherToday] = useState<WeatherTodayType>({
+    feels_like: undefined,
+    weather: undefined,
+    temp_max: undefined,
+    temp_min: undefined,
+  });
+
   const fetchWeather = async (locationInput: CoordinateInfo) => {
-    // try {
-    //   const response = await fetch(
-    //     `${weatherApiUrl}/weather?lat=${locationInput.value.latitude}&lon=${locationInput.value.longitude}&appid=${WEATHER_API_KEY}`
-    //   );
-    //   const result = await response.text();
-
-    //   console.log(result);
-    // } catch (error) {
-    //   console.error(error);
-    // }
-
     const { latitude, longitude } = locationInput.value;
 
     const currentWeatherFetch = fetch(
@@ -58,8 +57,17 @@ const WeatherProvider = ({ children }: PropsWithChildren) => {
         const weatherResponse = await res[0].json();
         const forecastResponse = await res[1].json();
 
-        console.log(locationInput.label)
+        console.log(locationInput.label);
+        // const weatherObject = weatherResponse.main;
         console.log(weatherResponse);
+        console.log(weatherResponse.weather[0].main);
+        const updatedWeather: WeatherTodayType = {
+          feels_like: weatherResponse.main.feels_like,
+          temp_max: weatherResponse.main.temp_max,
+          temp_min: weatherResponse.main.temp_min,
+          weather: weatherResponse.weather[0].main,
+        };
+        setWeatherToday(updatedWeather);
         console.log(forecastResponse);
       })
       .catch((err) => console.log(err));
@@ -73,12 +81,13 @@ const WeatherProvider = ({ children }: PropsWithChildren) => {
 
   const contextValue: WeatherContextType = {
     location,
+    weatherToday,
     changeLocation,
   };
 
-  // useEffect(() => {
-  //   fetchWeather();
-  // }, [location]);
+  useEffect(() => {
+    fetchWeather(location);
+  }, []);
 
   return (
     <WeatherContext.Provider value={contextValue}>

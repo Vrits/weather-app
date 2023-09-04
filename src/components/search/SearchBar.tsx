@@ -13,7 +13,8 @@ const SearchBar = () => {
 
   type CityLocation = {
     city: string;
-    countryCode: string;
+    country: string;
+    region: string;
     latitude: number;
     longitude: number;
   };
@@ -27,14 +28,12 @@ const SearchBar = () => {
       const result = await response.text();
 
       const data = JSON.parse(result).data.map((e: CityLocation) => ({
-        label: `${e.city}, ${e.countryCode}`,
+        label: `${e.city}, ${e.region}, ${e.country}`,
         value: {
           latitude: e.latitude,
           longitude: e.longitude,
         },
       }));
-
-      // console.log(data);
 
       return {
         options: data,
@@ -57,7 +56,8 @@ const SearchBar = () => {
 
   return (
     <>
-      <AsyncPaginate className="w-80 max-w-full"
+      <AsyncPaginate
+        className="w-full max-w-xl"
         debounceTimeout={600}
         placeholder="Search for a city"
         loadOptions={loadOptions}
