@@ -1,7 +1,7 @@
 
 import { useWeather } from "../../context/useWeather";
 import WeatherDetail from "./WeatherDetail";
-import cloudy from "/public/Images/cloudy.jpg";
+import cloudy from "/src/Images/cloudy.jpg";
 const CurrentWeather = () => {
   const {location, weatherToday} = useWeather()
   const {feels_like, weather,temp_max, temp_min} = weatherToday

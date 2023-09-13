@@ -1,0 +1,10 @@
+cloudy                  https://unsplash.com/photos/OelZIyyRKZw
+Thunderstorm            https://unsplash.com/photos/2Qv41Ccof1Q
+Thunderstorm Drizzle    https://unsplash.com/photos/xM-xt8qyd3E
+Thunderstorm Rain       https://unsplash.com/photos/q7pjd0rfQqY
+
+Drizzle                 https://unsplash.com/photos/bWtd1ZyEy6w
+Rain                    https://unsplash.com/photos/We01ED9Ei6g
+Snow                    https://unsplash.com/photos/IWenq-4JHqo
+Haze                    https://unsplash.com/photos/tZvffZmwVAw
+Clear                   https://unsplash.com/photos/EBXt5Y6o3bE

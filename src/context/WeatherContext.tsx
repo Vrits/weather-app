@@ -14,6 +14,10 @@ export type WeatherTodayType = {
   weather: string | undefined;
   temp_max: number | undefined;
   temp_min: number | undefined;
+  wind: number | undefined;
+  humidity: number | undefined;
+  pressure: number | undefined;
+  visibility: number | undefined;
 };
 
 export type WeatherContextType = {
@@ -40,6 +44,11 @@ const WeatherProvider = ({ children }: PropsWithChildren) => {
     weather: undefined,
     temp_max: undefined,
     temp_min: undefined,
+    wind: undefined,
+    humidity: undefined,
+    pressure: undefined,
+    visibility: undefined,
+
   });
 
   const fetchWeather = async (locationInput: CoordinateInfo) => {
@@ -66,6 +75,11 @@ const WeatherProvider = ({ children }: PropsWithChildren) => {
           temp_max: weatherResponse.main.temp_max,
           temp_min: weatherResponse.main.temp_min,
           weather: weatherResponse.weather[0].main,
+          wind: weatherResponse.wind.speed,
+          humidity: weatherResponse.main.humidity,
+          pressure: weatherResponse.main.pressure,
+          visibility: weatherResponse.visibility,
+          
         };
         setWeatherToday(updatedWeather);
         console.log(forecastResponse);
