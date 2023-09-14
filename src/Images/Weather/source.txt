@@ -6,5 +6,5 @@ Thunderstorm Rain       https://unsplash.com/photos/q7pjd0rfQqY
 Drizzle                 https://unsplash.com/photos/bWtd1ZyEy6w
 Rain                    https://unsplash.com/photos/We01ED9Ei6g
 Snow                    https://unsplash.com/photos/IWenq-4JHqo
-Haze                    https://unsplash.com/photos/tZvffZmwVAw
+Haze                    https://unsplash.com/photos/KT3WlrL_bsg
 Clear                   https://unsplash.com/photos/EBXt5Y6o3bE

@@ -15,12 +15,22 @@ const CurrentWeather = () => {
     }
   };
 
+  const weather_id = 734;
+
   useEffect(() => {
     if (!weather) return;
+
+    let weatherImg: string;
+
+    if (Math.floor(weather_id / 100) === 7) {
+      weatherImg = "Haze";
+    } else {
+      weatherImg = weather;
+    }
+
     const loadImageAsync = async () => {
       try {
-        console.log(weather);
-        const image = await loadImage(weather);
+        const image = await loadImage(weatherImg);
         setImageSrc(image.default);
       } catch (error) {
         console.error("Error loading image:", error);
@@ -44,7 +54,9 @@ const CurrentWeather = () => {
         </div>
         <div className="p-4 flex justify-between items-center">
           <div>
-            <p className="text-7xl font-bold drop-shadow-2xl">{kelvinToCelcius(feels_like)}</p>
+            <p className="text-7xl font-bold drop-shadow-2xl">
+              {kelvinToCelcius(feels_like)}
+            </p>
             <p className="font-bold text-lg drop-shadow-2xl">{weather}</p>
             <p className="font-bold text-lg drop-shadow-2xl">
               Min {kelvinToCelcius(temp_min)} • Max {kelvinToCelcius(temp_max)}

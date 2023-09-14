@@ -18,6 +18,8 @@ export type WeatherTodayType = {
   humidity: number | undefined;
   pressure: number | undefined;
   visibility: number | undefined;
+  weather_id: number | undefined;
+  
 };
 
 export type WeatherContextType = {
@@ -48,6 +50,7 @@ const WeatherProvider = ({ children }: PropsWithChildren) => {
     humidity: undefined,
     pressure: undefined,
     visibility: undefined,
+    weather_id: undefined,
 
   });
 
@@ -79,6 +82,7 @@ const WeatherProvider = ({ children }: PropsWithChildren) => {
           humidity: weatherResponse.main.humidity,
           pressure: weatherResponse.main.pressure,
           visibility: weatherResponse.visibility,
+          weather_id: weatherResponse.weather[0].id
           
         };
         setWeatherToday(updatedWeather);

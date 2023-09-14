@@ -1,1 +1,1 @@
-export const loadImage = async (path: string) => await import(`./${path}.jpg`);
+export const loadImage = async (path: string) => await import(`./Weather/${path}.jpg`);
