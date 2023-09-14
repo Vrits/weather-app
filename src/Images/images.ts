@@ -1,0 +1,1 @@
+export const loadImage = async (path: string) => await import(`./${path}.jpg`);

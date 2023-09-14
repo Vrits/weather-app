@@ -45,7 +45,7 @@ const WeatherDetail = () => {
 
       <div className="my-4">
         <p>Feels Like</p>
-        <p className="text-6xl">{kelvinToCelcius(feels_like)}</p>
+        <p className="text-6xl drop-shadow-2xl">{kelvinToCelcius(feels_like)}</p>
       </div>
       <div className="sm:flex justify-between divide-y divide-solid divide-slate-600 sm:divide-y-0 space-y-4 sm:space-y-0">
         <div className="flex flex-col flex-1 items-center divide-y divide-slate-600 divide-solid space-y-4">
