@@ -25,7 +25,7 @@ const WeatherDetail = () => {
     if (f && h) {
         const feels_likeCelcius = Math.round(f - 273.15)
         const result = feels_likeCelcius - ((100 - h) / 5)
-        return result
+        return result.toFixed(1)
     } else {
       return 0;
     }

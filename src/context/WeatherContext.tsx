@@ -12,6 +12,7 @@ export type CoordinateInfo = {
 export type WeatherTodayType = {
   feels_like: number | undefined;
   weather: string | undefined;
+  description: string | undefined;
   temp_max: number | undefined;
   temp_min: number | undefined;
   wind: number | undefined;
@@ -19,7 +20,7 @@ export type WeatherTodayType = {
   pressure: number | undefined;
   visibility: number | undefined;
   weather_id: number | undefined;
-  
+  weather_icon: string | undefined;
 };
 
 export type WeatherContextType = {
@@ -44,6 +45,7 @@ const WeatherProvider = ({ children }: PropsWithChildren) => {
   const [weatherToday, setWeatherToday] = useState<WeatherTodayType>({
     feels_like: undefined,
     weather: undefined,
+    description: undefined,
     temp_max: undefined,
     temp_min: undefined,
     wind: undefined,
@@ -51,7 +53,7 @@ const WeatherProvider = ({ children }: PropsWithChildren) => {
     pressure: undefined,
     visibility: undefined,
     weather_id: undefined,
-
+    weather_icon: undefined,
   });
 
   const fetchWeather = async (locationInput: CoordinateInfo) => {
@@ -78,12 +80,13 @@ const WeatherProvider = ({ children }: PropsWithChildren) => {
           temp_max: weatherResponse.main.temp_max,
           temp_min: weatherResponse.main.temp_min,
           weather: weatherResponse.weather[0].main,
+          description: weatherResponse.weather[0].description,
           wind: weatherResponse.wind.speed,
           humidity: weatherResponse.main.humidity,
           pressure: weatherResponse.main.pressure,
           visibility: weatherResponse.visibility,
-          weather_id: weatherResponse.weather[0].id
-          
+          weather_id: weatherResponse.weather[0].id,
+          weather_icon: weatherResponse.weather[0].icon,
         };
         setWeatherToday(updatedWeather);
         console.log(forecastResponse);
