@@ -77,8 +77,10 @@ const CurrentWeather = () => {
               Min {kelvinToCelcius(temp_min)} • Max {kelvinToCelcius(temp_max)}
             </p>
           </div>
-          <div className="bg-white/30 backdrop-blur-sm rounded-lg h-full">
-            <img src={iconSrc} alt={`${weather} icon`}  />
+          <div 
+          // className="bg-white/30 backdrop-blur-sm rounded-lg h-full"
+          >
+            <img src={iconSrc} alt={`${weather} icon`} className="drop-shadow-[2px_2px_3px_#000000]" />
           </div>
         </div>
       </div>

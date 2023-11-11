@@ -40,7 +40,7 @@ const WeatherDetail = () => {
   };
 
   return (
-    <div className="flex flex-col bg-white rounded-lg pt-4 pb-8 px-8 mt-4 shadow-lg w-full max-w-xl text-slate-800">
+    <div className="flex flex-col bg-gray-50 rounded-lg pt-4 pb-8 px-8 mt-4 shadow-lg w-full max-w-xl text-slate-800">
       <h2 className="text-xl font-bold">{location.label}</h2>
 
       <div className="my-4">

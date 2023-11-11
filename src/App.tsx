@@ -1,3 +1,4 @@
+import DailyForecast from "./components/daily/DailyForecast";
 import SearchBar from "./components/search/SearchBar";
 import CurrentWeather from "./components/weather/CurrentWeather";
 
@@ -7,6 +8,7 @@ function App() {
 
       <SearchBar />
       <CurrentWeather />
+      <DailyForecast />
   </section>
   );
 }

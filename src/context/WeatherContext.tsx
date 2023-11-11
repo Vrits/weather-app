@@ -1,33 +1,12 @@
 import { PropsWithChildren, createContext, useState, useEffect } from "react";
 import { WEATHER_API_KEY, weatherApiUrl } from "../api/api";
-
-export type CoordinateInfo = {
-  label: string;
-  value: {
-    latitude: number | undefined;
-    longitude: number | undefined;
-  };
-};
-
-export type WeatherTodayType = {
-  feels_like: number | undefined;
-  weather: string | undefined;
-  description: string | undefined;
-  temp_max: number | undefined;
-  temp_min: number | undefined;
-  wind: number | undefined;
-  humidity: number | undefined;
-  pressure: number | undefined;
-  visibility: number | undefined;
-  weather_id: number | undefined;
-  weather_icon: string | undefined;
-};
-
-export type WeatherContextType = {
-  location: CoordinateInfo;
-  weatherToday: WeatherTodayType;
-  changeLocation: (locationInput: CoordinateInfo) => void;
-};
+import {
+  CoordinateInfo,
+  WeatherTodayType,
+  WeeklyWeatherType,
+  WeatherContextType,
+  ForecastItemType,
+} from "./types";
 
 export const WeatherContext = createContext<WeatherContextType | undefined>(
   undefined
@@ -56,6 +35,23 @@ const WeatherProvider = ({ children }: PropsWithChildren) => {
     weather_icon: undefined,
   });
 
+  const [weeklyWeather, setWeeklyWeather] = useState<WeeklyWeatherType[]>([
+    {
+      feels_like: undefined,
+      weather: undefined,
+      description: undefined,
+      temp_max: undefined,
+      temp_min: undefined,
+      wind: undefined,
+      humidity: undefined,
+      pressure: undefined,
+      visibility: undefined,
+      weather_id: undefined,
+      weather_icon: undefined,
+      date: undefined,
+    },
+  ]);
+
   const fetchWeather = async (locationInput: CoordinateInfo) => {
     const { latitude, longitude } = locationInput.value;
 
@@ -71,10 +67,6 @@ const WeatherProvider = ({ children }: PropsWithChildren) => {
         const weatherResponse = await res[0].json();
         const forecastResponse = await res[1].json();
 
-        // console.log(locationInput.label);
-        // const weatherObject = weatherResponse.main;
-        // console.log(weatherResponse);
-        // console.log(weatherResponse.weather[0].main);
         const updatedWeather: WeatherTodayType = {
           feels_like: weatherResponse.main.feels_like,
           temp_max: weatherResponse.main.temp_max,
@@ -88,8 +80,30 @@ const WeatherProvider = ({ children }: PropsWithChildren) => {
           weather_id: weatherResponse.weather[0].id,
           weather_icon: weatherResponse.weather[0].icon,
         };
+
+        const updatedWeeklyWeather: WeeklyWeatherType[] =
+          forecastResponse.list.map((e: ForecastItemType) => ({
+            feels_like: e.main.feels_like,
+            temp_max: e.main.temp_max,
+            temp_min: e.main.temp_min,
+            weather: e.weather[0].main,
+            description: e.weather[0].description,
+            wind: e.wind.speed,
+            humidity: e.main.humidity,
+            pressure: e.main.pressure,
+            visibility: e.visibility,
+            weather_id: e.weather[0].id,
+            weather_icon: e.weather[0].icon,
+            date: e.dt,
+          }));
+
         setWeatherToday(updatedWeather);
-        console.log(forecastResponse);
+        const weeklyIndex = [7, 15, 23, 31, 39];
+        const newWeeklyWeather = updatedWeeklyWeather.filter((_, index) =>
+          weeklyIndex.includes(index)
+        );
+
+        setWeeklyWeather(newWeeklyWeather);
       })
       .catch((err) => console.log(err));
   };
@@ -97,13 +111,13 @@ const WeatherProvider = ({ children }: PropsWithChildren) => {
   const changeLocation = (locationInput: CoordinateInfo) => {
     setLocation(locationInput);
     fetchWeather(locationInput);
-    // console.log(locationInput)
   };
 
   const contextValue: WeatherContextType = {
     location,
     weatherToday,
     changeLocation,
+    weeklyWeather,
   };
 
   useEffect(() => {
