@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useWeather } from "../../context/useWeather";
-import WeatherDetail from "./WeatherDetail";
 import { loadIcons, loadImage } from "../../Images/images";
+import { kelvinToCelcius } from "../utils/weatherUtils";
+
 const CurrentWeather = () => {
   const [imageSrc, setImageSrc] = useState("");
   const [iconSrc, setIConSrc] = useState("");
@@ -33,7 +34,6 @@ const CurrentWeather = () => {
         const icon = await loadIcons(weather_icon);
         setImageSrc(image.default);
         setIConSrc(icon.default);
-        // console.log(icon.default)
       } catch (error) {
         console.error("Error loading image:", error);
       }
@@ -41,14 +41,6 @@ const CurrentWeather = () => {
 
     loadImageAsync();
   }, [weather, weather_id, weather_icon]);
-
-  const kelvinToCelcius = (e: number | undefined) => {
-    if (e) {
-      return `${Math.round(e - 273.15)}°`;
-    } else {
-      return "";
-    }
-  };
 
   const capitalizeFirstLetter = (s: string | undefined) => {
     if (s) {
@@ -78,14 +70,15 @@ const CurrentWeather = () => {
               Min {kelvinToCelcius(temp_min)} • Max {kelvinToCelcius(temp_max)}
             </p>
           </div>
-          <div 
-          // className="bg-white/30 backdrop-blur-sm rounded-lg h-full"
-          >
-            <img src={iconSrc} alt={`${weather} icon`} className="drop-shadow-[2px_2px_3px_#000000]" />
+          <div>
+            <img
+              src={iconSrc}
+              alt={`${weather} icon`}
+              className="drop-shadow-[2px_2px_3px_#000000]"
+            />
           </div>
         </div>
       </div>
-      <WeatherDetail />
     </>
   );
 };
