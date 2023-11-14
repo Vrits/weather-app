@@ -33,6 +33,7 @@ const CurrentWeather = () => {
         const icon = await loadIcons(weather_icon);
         setImageSrc(image.default);
         setIConSrc(icon.default);
+        // console.log(icon.default)
       } catch (error) {
         console.error("Error loading image:", error);
       }
