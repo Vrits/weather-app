@@ -67,8 +67,6 @@ const WeatherProvider = ({ children }: PropsWithChildren) => {
         const weatherResponse = await res[0].json();
         const forecastResponse = await res[1].json();
 
-        console.log(forecastResponse)
-
         const updatedWeather: WeatherTodayType = {
           feels_like: weatherResponse.main.feels_like,
           temp_max: weatherResponse.main.temp_max,

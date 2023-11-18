@@ -51,8 +51,13 @@ const CurrentWeather = () => {
   return (
     <>
       <div
-        className="max-w-xl w-full flex flex-col rounded-lg mt-2 overflow-hidden text-white"
-        style={{ backgroundImage: `url(${imageSrc})` }}
+        className="max-w-xl md:max-w-2xl w-full flex flex-col rounded-lg mt-2 overflow-hidden text-white shadow-lg"
+        style={{
+          backgroundImage: `url(${imageSrc})`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+        }}
       >
         <div className="bg-black/50 backdrop-blur-md p-3">
           <p className="font-bold text-xl">{location.label} </p>

@@ -22,8 +22,6 @@ export default function DailyForecast() {
       }
     }
 
-    console.log(weeklyWeather);
-
     setIConSrc([...iconArray]);
   };
 
@@ -50,7 +48,7 @@ export default function DailyForecast() {
     return dayArray[day];
   };
   return (
-    <Accordion className="max-w-xl w-full mt-4 shadow-lg flex flex-col overflow-hidden">
+    <Accordion className="max-w-xl w-full md:max-w-2xl mt-4 lg:mt-2 shadow-lg flex flex-col overflow-hidden">
       {weeklyWeather.map((e, i) => {
         return (
           <Accordion.Panel key={crypto.randomUUID()}>

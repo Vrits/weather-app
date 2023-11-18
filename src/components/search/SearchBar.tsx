@@ -57,7 +57,7 @@ const SearchBar = () => {
   return (
     <>
       <AsyncPaginate
-        className="w-full max-w-xl"
+        className="w-full max-w-5xl shadow-lg"
         debounceTimeout={600}
         placeholder="Search for a city"
         loadOptions={loadOptions}
